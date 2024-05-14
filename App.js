@@ -1,49 +1,40 @@
-import React from "react"; 
+import React from "react";
 import ReactDOM from "react-dom/client";
 
-// const heading = React.createElement(
-//   "h1",
-//   { id: "heading",  xyz: "abc" },
-//   "Hello World from React!"
-// );
+//React
+// const heading = React.createElement("h1", { id: "heading" }, "This is React");
 
-/***
- *
- * <div id="parent">
- *      <div id="child">
- *          <h1> I'm a h1 tag</h1>
- *          <h2> I'm a h2 tag</h2>
- *      </div>
- *      <div id="child2">
- *          <h1> I'm a h1 tag</h1>
- *          <h2> I'm a h2 tag</h2>
- *      </div>
- * </div>
- *
- * now let's create a nested elements
- */
+// JSX - HTML like syntax
+// JSX => React.createElement("h1", {id:"heading"}, "Namaste React") => ReactElement-JS Object => HTMLElement(render);
+const jsxHeading = <h1 id="heading">Namaste React from JSX</h1>;
 
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  [
-    React.createElement("div", { id: "child" }, [
-        React.createElement("h1", {}, "This is Namaste React"),
-        React.createElement("h2", {}, "I'm a h2 tag"),
-      ]),
-      React.createElement("div", { id: "child2" }, [
-        React.createElement("h1", {}, "I'm a h1 tag"),
-        React.createElement("h2", {}, "I'm a h2 tag"),
-      ])
-  ]
-);
+//React Element
+const heading = (
+  <h1 className="head">
+    Namaste React !!
+  </h1>
+)
 
-/**
- * Now to avoid this nested unreadable code, we will use the JSX(Javascript Extension)
- */
+//Functional Component
+const Title = () => {   // This is one way to write 
+  return <h2>React Episode 3</h2>
+}
 
-console.log(parent);
+const HeadingComponent2 = () => (  // This is another way to write same function, where we used () as our code is written in different lines 
+  <h3>This is the functional component 2</h3>
+)
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const HeadingComponent3 = () => (  // This is another way to write same function 
+  <div id="container">
+    {heading}
+    {Title()} {/**We can call Title component this way also */}
+    <Title/>  {/**or this way */}
+    <Title></Title> {/**or this */}
+    <h3 className="heading">This is the functional component</h3>
+  </div>
+)
 
-root.render(parent);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// root.render(heading);
+root.render(<HeadingComponent3/>);
