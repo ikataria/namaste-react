@@ -1,40 +1,89 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//React
-// const heading = React.createElement("h1", { id: "heading" }, "This is React");
+const resList = require('./resList');
 
-// JSX - HTML like syntax
-// JSX => React.createElement("h1", {id:"heading"}, "Namaste React") => ReactElement-JS Object => HTMLElement(render);
-const jsxHeading = <h1 id="heading">Namaste React from JSX</h1>;
+/**
+ * Header
+ *  - Logo
+ *  - NavItems
+ * Body
+ *  - Search
+ *  - RestaurantContainer
+ *    - RestaurantCard
+ *      - Img
+ *      - Name of Res, Star, Cuisine, Delivery time
+ * Footer
+ *  - Copyright
+ *  - Links
+ *  - Address
+ *  - Contact
+ */
 
-//React Element
-const heading = (
-  <h1 className="head">
-    Namaste React !!
-  </h1>
-)
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=fast-food&txt_keyword=All"
+        />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 
-//Functional Component
-const Title = () => {   // This is one way to write 
-  return <h2>React Episode 3</h2>
-}
+const RestaurantCard = (resData) => {
+  {console.log('resData:', resData)}
+  const { name, cloudinaryImageId, costForTwo, cuisines, avgRating, sla } = resData.info;
 
-const HeadingComponent2 = () => (  // This is another way to write same function, where we used () as our code is written in different lines 
-  <h3>This is the functional component 2</h3>
-)
+  return (
+    <div className="res-card">
+      <img
+        className="res-logo"
+        alt="Food"
+        src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId}
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines}</h4>
+      <h4>{avgRating}</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{sla.deliveryTime} minutes</h4>
+    </div>
+  );
+};
 
-const HeadingComponent3 = () => (  // This is another way to write same function 
-  <div id="container">
-    {heading}
-    {Title()} {/**We can call Title component this way also */}
-    <Title/>  {/**or this way */}
-    <Title></Title> {/**or this */}
-    <h3 className="heading">This is the functional component</h3>
-  </div>
-)
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        {
+          // resList.map(restaurant => <RestaurantCard resData = {restaurant} />)
+          // resList.map(restaurant => {console.log('>>>',restaurant)} )
+        }
+      </div>
+    </div>
+  );
+};
 
-// root.render(heading);
-root.render(<HeadingComponent3/>);
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />);

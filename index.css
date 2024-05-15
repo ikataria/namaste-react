@@ -1,3 +1,59 @@
 #heading{
     color: red
 }
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+}
+
+.logo{
+    width: 200px;
+}
+
+.nav-items ul{
+    display: flex;
+    padding: 0 20px;
+}
+
+.nav-items ul li{
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+.body{
+    border: 2px solid black;
+}
+
+.search{
+    margin: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.res-container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 5px;
+}
+
+.res-card{
+    margin: 5px 0;
+    padding: 4px ;
+    width: 200px;
+    height: auto;
+    border: 1px solid gray;
+    background-color: #f0f0f0;
+}
+
+.res-card:hover{
+    border: 1px dotted red;
+}
+
+.res-logo{
+    width: 100%;
+    /* padding: 5px; */
+}
