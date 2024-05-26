@@ -83,3 +83,11 @@
     height: 400px;
     background-color: #f0f0f0;
 }
+
+.login-btn{
+    padding: 0 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
