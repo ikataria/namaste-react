@@ -91,3 +91,10 @@
     cursor: pointer;
   }
   
+  /* User */
+  .user{
+    width: 700px;
+    margin: 25px auto;
+    border: 2px solid black;
+    padding: 10px;
+  }
