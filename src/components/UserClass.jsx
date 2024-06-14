@@ -29,10 +29,10 @@ class UserClass extends React.Component {
     // debugger;
 
     return (
-      <div className="user">
-        <img src={avatar_url} alt="Pic" />
-        <h2>Name: {name}</h2>
-        <h2>Location: {location}</h2>
+      <div className="user flex flex-col flex-nowrap items-center my-5">
+        <img src={avatar_url} alt="Pic" className="rounded-full py-3" />
+        <h2 className="text-xl font-medium uppercase underline">Name: {name}</h2>
+        <h2 className="text-xl font-medium uppercase underline">Location: {location}</h2>
       </div>
     );
   }

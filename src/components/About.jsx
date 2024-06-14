@@ -28,8 +28,8 @@ class About extends Component{
 
     render(){
         return (
-            <div className="about">
-                <h2>This is About page.</h2>
+            <div className="about flex flex-col items-center my-10 lg:max-w-[80%] lg:mx-auto ">
+                <h2 className="text-6xl font-semibold">About Me</h2>
                 {/* <User name={"Mohit"} location={"Canada"}/> */}
                 <UserClass userInfo={this.state.userInfo}/>
             </div>
