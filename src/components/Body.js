@@ -24,21 +24,19 @@ const Body = () => {
 
     const json = await data.json();
     console.log("swiggyData:", json);
-    setListOfRestaurant(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    const restArr = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants || json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    setListOfRestaurant(restArr);
+    setFilteredRestaurant(restArr);
   };
 
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter flex justify-center max-w-[1000px]">
+      <div className="filter flex justify-around max-w-[80%] mx-auto my-10 ">
+        <div className="flex justify-center">
         <input
-          className="search-box border border-solid border-black"
+          className="search-box p-3 mr-2 text-xl border border-solid border-black rounded-md"
           value={searchRes}
           placeholder="Search restaurant here..."
           onChange={(e) => {
@@ -46,7 +44,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-Btn"
+          className="search-Btn p-3 mr-2  text-xl bg-orange-400 rounded-md"
           onClick={() => {
             const filteredData = listOfRestaurants.filter((e) => {
               return e.info.name
@@ -59,8 +57,9 @@ const Body = () => {
         >
           Search
         </button>
+        </div>
         <button
-          className="filter-btn"
+          className="filter-btn p-3 mr-2 text-xl bg-slate-400 rounded-md"
           onClick={() => {
             const filteredRestaurants = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4.4
@@ -71,8 +70,9 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        
       </div>
-      <div className="res-container">
+      <div className="res-container lg:flex lg:flex-wrap lg:justify-center lg:max-w-[80%] lg:mx-auto">
         {filteredRestaurant.map((restaurant, index) => (
           <Link
             key={restaurant.info.id}
