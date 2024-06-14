@@ -25,10 +25,10 @@ const Body = () => {
     const json = await data.json();
     console.log("swiggyData:", json);
     setListOfRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -36,9 +36,9 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
+      <div className="filter flex justify-center max-w-[1000px]">
         <input
-          className="search-box"
+          className="search-box border border-solid border-black"
           value={searchRes}
           placeholder="Search restaurant here..."
           onChange={(e) => {

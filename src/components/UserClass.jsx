@@ -12,7 +12,7 @@ class UserClass extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.userInfo  +"Child Component Did Mount");
+    console.log(JSON.stringify(this.props.userInfo)  +"Child Component Did Mount");
   }
 
   componentDidUpdate(){
