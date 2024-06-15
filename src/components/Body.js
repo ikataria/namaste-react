@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withLabelOpen} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,6 @@ const Body = () => {
   const [searchRes, setSearchRes] = useState("");
 
   useEffect(() => {
-    console.log("useEffect called");
     fetchData();
   }, []);
 
@@ -23,11 +22,13 @@ const Body = () => {
     const data = await fetch(SWIGGY_RES_URL);
 
     const json = await data.json();
-    console.log("swiggyData:", json);
     const restArr = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants || json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // console.log("swiggyData:", restArr);
     setListOfRestaurant(restArr);
     setFilteredRestaurant(restArr);
   };
+
+  const OpenRestaurant = withLabelOpen(RestaurantCard);
 
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
@@ -78,7 +79,9 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {/* Find out the restaurant which is open and add a label of OPEN to that restaurant card */}
+            { restaurant.info.isOpen ? <OpenRestaurant resData={restaurant}/> :  <RestaurantCard resData={restaurant} />}
+           
           </Link>
         ))}
       </div>

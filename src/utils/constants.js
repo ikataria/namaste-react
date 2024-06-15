@@ -4,3 +4,4 @@ export const SWIGGY_RES_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi
 export const MENU_LIST_API = "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId="
 
 export const RESTAURANT_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.Restaurant";
+export const ITEM_CATEGORY_KEY = "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
