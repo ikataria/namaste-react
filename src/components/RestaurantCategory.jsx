@@ -1,25 +1,33 @@
-import {useState} from "react"; 
+import { useState } from "react";
 import ItemLists from "./ItemLists";
 
 const RestaurantCategory = (props) => {
-  const { data } = props;
+  const { data, showItems, setShowIndex, index } = props;
 
-  const [showItems, setShowItems ] = useState(false);
-  
-const handleClick = () => {
-    !showItems ? setShowItems(true) : setShowItems(false)  
-}
+  // const [showItems, setShowItems] = useState(false);
+
+  console.log("index", index)
+  console.log("showItems",showItems)
+
+  const handleClick = () => {
+    
+    setShowIndex()
+    console.log("clicked")
+  };
 
   return (
-    <div className="mt-5">
-      <div className="menuList_heading cursor-pointer" onClick={handleClick}>
-        <span>
+    <div className="mt-5 border-b-8 gray-black">
+      <div
+        className="menuList_heading flex justify-between cursor-pointer my-2 py-2 font-bold  rounded-md"
+        onClick={handleClick}
+      >
+        <span className="text-lg">
           {data.title} - ({data.itemCards.length})
         </span>
         <span>🔽</span>
       </div>
 
-       { showItems && <ItemLists itemsArr = {data.itemCards}/>}
+      {showItems && <ItemLists itemsArr={data.itemCards} />}
     </div>
   );
 };

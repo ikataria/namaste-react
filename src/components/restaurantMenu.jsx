@@ -8,10 +8,13 @@ import {
   MENU_LIST_API,
   ITEM_CATEGORY_KEY,
 } from "../utils/constants";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const { resInfo } = useRestaurantMenu(resId);
+
+  const [showIndex, setShowIndex] = useState(null);
 
   if (resInfo === null) return <Shimmer />;
   // First find out the restaurant info Arr
@@ -33,14 +36,14 @@ const RestaurantMenu = () => {
     (category) => category?.card?.card?.["@type"] === ITEM_CATEGORY_KEY
   );
 
-  // console.log("resInfo:", menuCategoriesArr);
+  console.log("showIndex:", showIndex);
 
   return (
-    <div className="resMenu text-center w-6/12 mx-auto my-2">
+    <div className="resMenu  w-6/12 mx-auto my-2">
       <div>
         <h1 className="font-bold my-2 text-2xl">{name}</h1>
-        <div className="border border-solid border-slate-300 shadow-2xl rounded-2xl">
-          <p className="font-semibold my-2 text-xl">
+        <div className="border border-solid border-slate-300 pl-4 shadow-xl rounded-2xl">
+          <p className="font-semibold my-2 text-xl ">
             ⭐{avgRating} - {costForTwoMessage}
           </p>
           <p className="font-semibold my-2 text-sm text-orange-800 underline">
@@ -49,7 +52,15 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-        {menuCategoriesArr.map((category, index) => (<RestaurantCategory key = {index} data = {category?.card?.card}/>))}
+      {menuCategoriesArr.map((category, index) => (
+        <RestaurantCategory
+          key={index}
+          data={category?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+          index={index}
+        />
+      ))}
     </div>
   );
 };

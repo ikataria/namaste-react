@@ -1,8 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import RestaurantCard, {withLabelOpen} from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
+import RestaurantCard, { withLabelOpen } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 let resList = require("../utils/mockData");
 import { SWIGGY_RES_URL } from "../utils/constants";
@@ -22,7 +23,11 @@ const Body = () => {
     const data = await fetch(SWIGGY_RES_URL);
 
     const json = await data.json();
-    const restArr = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants || json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    const restArr =
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     // console.log("swiggyData:", restArr);
     setListOfRestaurant(restArr);
     setFilteredRestaurant(restArr);
@@ -30,34 +35,36 @@ const Body = () => {
 
   const OpenRestaurant = withLabelOpen(RestaurantCard);
 
+  const { loggedInUser, setUserInfo } = useContext(UserContext);
+
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
       <div className="filter flex justify-around max-w-[80%] mx-auto my-10 ">
         <div className="flex justify-center">
-        <input
-          className="search-box p-3 mr-2 text-xl border border-solid border-black rounded-md"
-          value={searchRes}
-          placeholder="Search restaurant here..."
-          onChange={(e) => {
-            setSearchRes(e.target.value);
-          }}
-        />
-        <button
-          className="search-Btn p-3 mr-2  text-xl bg-orange-400 rounded-md"
-          onClick={() => {
-            const filteredData = listOfRestaurants.filter((e) => {
-              return e.info.name
-                .toLowerCase()
-                .includes(searchRes.toLowerCase());
-            });
+          <input
+            className="search-box p-3 mr-2 text-xl border border-solid border-black rounded-md"
+            value={searchRes}
+            placeholder="Search restaurant here..."
+            onChange={(e) => {
+              setSearchRes(e.target.value);
+            }}
+          />
+          <button
+            className="search-Btn p-3 mr-2  text-xl bg-orange-400 rounded-md"
+            onClick={() => {
+              const filteredData = listOfRestaurants.filter((e) => {
+                return e.info.name
+                  .toLowerCase()
+                  .includes(searchRes.toLowerCase());
+              });
 
-            setFilteredRestaurant(filteredData);
-          }}
-        >
-          Search
-        </button>
+              setFilteredRestaurant(filteredData);
+            }}
+          >
+            Search
+          </button>
         </div>
         <button
           className="filter-btn p-3 mr-2 text-xl bg-slate-400 rounded-md"
@@ -71,7 +78,17 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
-        
+
+        <div>
+          <label>User Name: </label>
+          <input
+            className="border border-solid border-black p-2 rounded-md"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserInfo(e.target.value);
+            }}
+          ></input>
+        </div>
       </div>
       <div className="res-container lg:flex lg:flex-wrap lg:justify-center lg:max-w-[80%] lg:mx-auto">
         {filteredRestaurant.map((restaurant, index) => (
@@ -80,8 +97,11 @@ const Body = () => {
             to={"/restaurants/" + restaurant.info.id}
           >
             {/* Find out the restaurant which is open and add a label of OPEN to that restaurant card */}
-            { restaurant.info.isOpen ? <OpenRestaurant resData={restaurant}/> :  <RestaurantCard resData={restaurant} />}
-           
+            {restaurant.info.isOpen ? (
+              <OpenRestaurant resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
