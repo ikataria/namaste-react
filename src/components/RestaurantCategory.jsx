@@ -6,13 +6,9 @@ const RestaurantCategory = (props) => {
 
   // const [showItems, setShowItems] = useState(false);
 
-  console.log("index", index)
-  console.log("showItems",showItems)
-
   const handleClick = () => {
     
     setShowIndex()
-    console.log("clicked")
   };
 
   return (

@@ -36,8 +36,6 @@ const RestaurantMenu = () => {
     (category) => category?.card?.card?.["@type"] === ITEM_CATEGORY_KEY
   );
 
-  console.log("showIndex:", showIndex);
-
   return (
     <div className="resMenu  w-6/12 mx-auto my-2">
       <div>
